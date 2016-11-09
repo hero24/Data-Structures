@@ -2,6 +2,8 @@
 #ifndef __IOSTREAM_H
 #include <iostream>
 #endif
+// "If it is, it is, If it's not, it's not." ~ Ziggy Marley
+
 template <typename T>
 struct SLLNode{
     T value;
