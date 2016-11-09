@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+
+# "Man is still the most extraordinary computer of all." ~ John F. Kennedy
+
 class QNode:
     """ Node for Queue """
     def __repr__(self):
