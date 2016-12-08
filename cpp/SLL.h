@@ -68,7 +68,6 @@ class SLL{
                 delete temp->next;
                 temp->next=NULL;
             }
-            std::cout << len << std::endl;
             return *this;
         }
         Type operator [](int n){
