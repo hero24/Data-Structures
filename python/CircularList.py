@@ -1,3 +1,12 @@
+#!/usr/bin/env python3
+
+"""
+   Imagination is more important than knowledge. 
+   For knowledge is limited to all we now know and understand,
+   while imagination embraces the entire world,
+   and all there ever will be to know and understand.
+   ~ Albert Einstein
+"""
 class CircularList:
     """
        CicrularList based on pythons built in list
