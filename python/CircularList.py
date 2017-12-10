@@ -43,8 +43,7 @@ class CircularList:
             return index
         else:
             length = len(self.array)
-            while(index >= length):
-                  index -= length
+            index = index % length 
             return index
 
     def append(self,item):
