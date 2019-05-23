@@ -3,9 +3,10 @@
  * "Z oddali nasze godziny szkolne błękitnieją" ~ Kornel Makuszyński
  */
 struct Node {
-	int val;
-	struct Node* next;
-};
+        int val __attribute__((aligned(8)));
+        struct Node* next __attribute__((aligned(8)));
+} __attribute__((aligned(16)));
+
 
 typedef void (*void_callback)(int val);
 typedef int (*ret_callback)(int val);
