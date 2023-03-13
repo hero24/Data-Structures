@@ -19,7 +19,7 @@ if __name__ == "__main__":
       version="0.1",
       description="Python implementations of various data-sturctures",
       author="hero24",
-      package_dir={'data_structures':'.'},
-      packages=["data_structures"]
+      package_dir={'hero24/data_structures':'.'},
+      packages=["hero24/data_structures"]
       )
 
