@@ -2,8 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+#ifndef HASH_SIZE
 #define HASH_SIZE 20
+#endif
 
+#ifndef HASH_TYPE
+#define HASH_TYPE int
+#endif
 /*
  * HashTable implementation in C.
  * Warning liable to buffer overflows as it uses unsafe 
@@ -17,7 +22,7 @@ struct Bucket {
 		char* key __attribute__((aligned(8)));
 		unsigned long long int hash __attribute__((aligned(8)));
 	} key __attribute__((aligned(8)));
-	int* value __attribute__((aligned(8)));
+	HASH_TYPE* value __attribute__((aligned(8)));
 	struct Bucket* next __attribute__((aligned(8)));
 } __attribute__((aligned(32)));
 
@@ -62,7 +67,7 @@ struct HashHead* create_hash(hash_callback hash_func){
 	return hash;
 }
 
-struct HashHead* add_element(char* key, int* val, struct HashHead* hash){
+struct HashHead* add_element(char* key, HASH_TYPE* val, struct HashHead* hash){
 	/*
 	 * Adds value val to HashTable with lookup key of key.
 	 * Returns HashTable.
@@ -94,7 +99,7 @@ static struct Bucket* get_bucket(char* key, struct HashHead* hash){
 	return bucket;
 }
 
-int* get_element(char* key, struct HashHead* hash){
+HASH_TYPE* get_element(char* key, struct HashHead* hash){
 	/*
 	 * Returns value stored under given key.
 	 */
@@ -119,7 +124,7 @@ int is_empty(struct HashHead* hash){
 	return hash->object_count == 0;
 }
 
-int* get_or_default(char *key, int* _default, struct HashHead* hash){
+HASH_TYPE* get_or_default(char *key, HASH_TYPE* _default, struct HashHead* hash){
 	/*
 	 * Get element stored at key from HashTable, if it doesnt exist
 	 * erturn _default value.
@@ -138,7 +143,7 @@ int contains_key(char* key, struct HashHead* hash){
 	return bucket != NULL;
 }
 
-int* replace(char* key, int* value, struct HashHead* hash){
+HASH_TYPE* replace(char* key, HASH_TYPE* value, struct HashHead* hash){
 	/*
 	 * Replace value stored at given key with given value.
 	 * Return old value.
@@ -146,30 +151,31 @@ int* replace(char* key, int* value, struct HashHead* hash){
 	struct Bucket* bucket = get_bucket(key, hash);
 	if(bucket == NULL)
 		return NULL;
-	int* prev = bucket->value;
+	HASH_TYPE* prev = bucket->value;
 	bucket->value = value;
 	return prev;
 }
 
-int* replace_or_create(char* key, int* val, struct HashHead* hash){
+HASH_TYPE* replace_or_create(char* key, HASH_TYPE* val, struct HashHead* hash){
 	/*
 	 * Replace value stored at given key with given value.
 	 * If it doesnt exist create new entry.
 	 * Return previous value or 0.
 	 */
-	int* ret = replace(key, val, hash);
+	HASH_TYPE* ret = replace(key, val, hash);
 	if (ret)
 		return ret;
 	add_element(key, val, hash);
 	return 0;
 }
 
-char* contains_value(int* val, struct HashHead* hash){
+char* contains_value(HASH_TYPE* val, struct HashHead* hash){
 	/*
 	 * Check if HashTable contains given value
 	 * if it does return the key that stores it.
 	 */
-	int i, v = *val;
+	int i;
+	HASH_TYPE v = *val;
 	struct HashHead hh = *hash;
 	struct Bucket* b;
 	for(i=0; i < HASH_SIZE; i++){
@@ -206,7 +212,7 @@ char** get_keys(int* ret_size, struct HashHead* hash){
 	return keys;
 }
 
-int* remove_entry(char* key, struct HashHead* hash){
+HASH_TYPE* remove_entry(char* key, struct HashHead* hash){
 	/*
 	 * Remove key and value that it points to from HashTable.
 	 * return value pointed to by given key.
@@ -214,7 +220,7 @@ int* remove_entry(char* key, struct HashHead* hash){
 	int index = get_hash(key, hash);
 	struct Bucket* bucket = hash->bucket_array[index];
 	struct Bucket* prev = NULL;
-	int* val = NULL;
+	HASH_TYPE* val = NULL;
 	while (bucket != NULL && strcmp(bucket->key.key, key)){
 		prev = bucket;
 		bucket = bucket->next;

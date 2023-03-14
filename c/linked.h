@@ -1,16 +1,20 @@
 #include <stdlib.h>
+
+#ifndef LINKED_TYPE
+#define LINKED_TYPE int
+#endif
 /*
  * "Z oddali nasze godziny szkolne błękitnieją" ~ Kornel Makuszyński
  */
 struct Node {
-        int val __attribute__((aligned(8)));
+        LINKED_TYPE val __attribute__((aligned(8)));
         struct Node* next __attribute__((aligned(8)));
 } __attribute__((aligned(16)));
 
 
-typedef void (*void_callback)(int val);
-typedef int (*ret_callback)(int val);
-typedef int (*reducer_callback)(int val, int acc);
+typedef void (*void_callback)(LINKED_TYPE val);
+typedef LINKED_TYPE (*ret_callback)(LINKED_TYPE val);
+typedef LINKED_TYPE (*reducer_callback)(LINKED_TYPE val, LINKED_TYPE acc);
 typedef struct Node* list;
 
 int free_nodes(struct Node* ptr){
@@ -25,7 +29,7 @@ int free_nodes(struct Node* ptr){
 	}
 }
 
-struct Node* add_elem(int val, struct Node* ptr){
+struct Node* add_elem(LINKED_TYPE val, struct Node* ptr){
 	// adds element to the end of the list
 	struct Node *n = (struct Node*) malloc(sizeof(struct Node));
 	ptr->next = n;
@@ -34,10 +38,10 @@ struct Node* add_elem(int val, struct Node* ptr){
 	return n;
 }
 
-static int rem_next_elem(struct Node* prev){
+static LINKED_TYPE rem_next_elem(struct Node* prev){
 	// removes next element from the list and returns its value
 	struct Node *n = prev->next;
-	int val;
+	LINKED_TYPE val;
 	prev->next = n->next;
 	val = n->val;
 	free(n);
@@ -53,19 +57,19 @@ struct Node* get_node(int i, struct Node* n){
 	return node;
 }
 
-struct Node* set_node(int index, int val, struct Node* n){
+struct Node* set_node(int index, LINKED_TYPE val, struct Node* n){
   // sets value of node at index i
 	struct Node* node = get_node(index, n);
 	node->val = val;
 	return node;
 }
 
-int rem_node(int index, struct Node* n){
+LINKED_TYPE rem_node(int index, struct Node* n){
   // removes node at index i and returns its value
 	return rem_next_elem(get_node(index-1,n));
 }
 
-struct Node* add_node(int index, int val, struct Node* n){
+struct Node* add_node(int index, LINKED_TYPE val, struct Node* n){
   // adds node at index i with value val
 	struct Node *m, *node;
 	m = get_node(index-1, n);
@@ -83,7 +87,7 @@ int length(struct Node* n){
 	return len;
 }
 
-struct Node* create_list(int init_val){
+struct Node* create_list(LINKED_TYPE init_val){
   // creates new list with initial value init_val at index 0
 	struct Node *n = (struct Node*) malloc(sizeof(struct Node));
 	n->val = init_val;
@@ -108,17 +112,17 @@ void map(struct Node* lst, ret_callback func){
 	}
 }
 
-int reduce(struct Node* lst, reducer_callback func){
+LINKED_TYPE reduce(struct Node* lst, reducer_callback func){
   // call func on all the values of the list and return result
 	struct Node* node;
-	int acc = lst->val;
+	LINKED_TYPE acc = lst->val;
 	for(node=lst->next; node!=NULL; node=node->next){
 		acc = func(node->val, acc);
 	}
 	return acc;
 }
 
-int contains(struct Node* lst, int val){
+int contains(struct Node* lst, LINKED_TYPE val){
   // check if list contains val, return index at which the value is
   // stored or -1 otherwise.
 	struct Node* node = lst;
