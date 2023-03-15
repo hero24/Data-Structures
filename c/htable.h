@@ -129,7 +129,7 @@ HASH_TYPE* get_or_default(char *key, HASH_TYPE* _default, struct HashHead* hash)
 	 * Get element stored at key from HashTable, if it doesnt exist
 	 * erturn _default value.
 	 */
-	int* elem = get_element(key, hash);
+	HASH_TYPE* elem = get_element(key, hash);
 	if (elem == NULL)
 		return _default;
 	return elem;
