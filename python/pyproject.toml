@@ -1,0 +1,25 @@
+# “Believe you can and you're halfway there."
+# ~ Theodore Roosevelt
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hero24.data_structures"
+version = "1.0"
+authors = [
+  { name="hero24", email="hero24@interia.pl" },
+]
+description = "A set of various data structures"
+readme = "README.md"
+requires-python = ">=3.5"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/hero24/Data-Structures/"
+Issues = "https://github.com/hero24/Data-Sturctures/issues/"
