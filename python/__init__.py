@@ -5,11 +5,13 @@
 from CircularList import CircularList
 from queue import Queue
 from GraphMatrix import GraphMatrix
+from GraphDict import GraphDict
 
 __all__ = [
     "Queue",
     "CircularList"
-    "GraphMatrix"
+    "GraphMatrix",
+    "GraphDict"
 ]
 
 if __name__ == "__main__":

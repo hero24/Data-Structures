@@ -1,4 +1,4 @@
-#“Every moment is a fresh beginning.”
+# "Every moment is a fresh beginning."
 # ~ T.S. Eliot
 
 class GraphMatrix:
@@ -39,7 +39,6 @@ class GraphMatrix:
         nodea, nodeb = self._get_connection(nodea, nodeb)
         self.connections[nodea][nodeb] = True
         self.connections[nodeb][nodea] = not self.directed
-        pass
 
     def remove_edge(self, nodea, nodeb):
         """
@@ -49,7 +48,6 @@ class GraphMatrix:
         self.connections[nodea][nodeb] = False
         if not self.directed:
             self.connections[nodeb][nodea] = self.directed
-        pass
 
     def yield_nodes(self):
         """
@@ -79,7 +77,7 @@ class GraphMatrix:
         present = self.connections[nodea][nodeb]
         if not self.directed:
             return present
-        return self.connections[nodeb][nodea] and present
+        return present or self.connections[nodeb][nodea]
 
     def adjacent(self, node):
         """
