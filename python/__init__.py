@@ -4,10 +4,12 @@
 """
 from CircularList import CircularList
 from queue import Queue
+from GraphMatrix import GraphMatrix
 
 __all__ = [
     "Queue",
     "CircularList"
+    "GraphMatrix"
 ]
 
 if __name__ == "__main__":

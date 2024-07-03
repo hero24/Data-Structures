@@ -7,6 +7,7 @@ A repository containing implementations of different data-structures in various 
 |Data structure|Languages|
 |--------------|---------|
 |`CircularList`|`Python`|
+|`GraphMatrix`|`Python`|
 |`HashTable`|`C`|
 |`Heap`|`C++`|
 |`Queue`|`Python`|
