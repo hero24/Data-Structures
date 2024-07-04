@@ -1,7 +1,7 @@
 # "Every moment is a fresh beginning."
 # ~ T.S. Eliot
 
-class GraphMatrix:
+class MatrixGraph:
     def __init__(self, directed=False):
         """
         Unweighted graph structure implemented using a built-in python list

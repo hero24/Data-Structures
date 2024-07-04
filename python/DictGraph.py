@@ -1,6 +1,6 @@
 # "Life is really simple, but we insist on making it complicated."
 #  ~ Confucius
-class GraphDict:
+class DictGraph:
     def __init__(self, directed=False):
         """
         Unweighted graph structure implemented using a built-in python dict

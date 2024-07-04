@@ -4,14 +4,14 @@
 """
 from CircularList import CircularList
 from queue import Queue
-from GraphMatrix import GraphMatrix
-from GraphDict import GraphDict
+from MatrixGraph import MatrixGraph
+from DictGraph import DictGraph
 
 __all__ = [
     "Queue",
     "CircularList"
-    "GraphMatrix",
-    "GraphDict"
+    "MatrixGraph",
+    "DictGraph.py"
 ]
 
 if __name__ == "__main__":
