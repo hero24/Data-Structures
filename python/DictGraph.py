@@ -23,7 +23,9 @@ class DictGraph:
         del self.nodes[node]
         for key in self.nodes:
             if node in self.nodes[key]:
-                self.nodes[key].remove(node)
+                idx = self.nodes[key].idx(node)
+                return self.nodes[key].pop(idx)
+
     def add_edge(self, nodea, nodeb):
         """
         add edge to the graph structure
@@ -36,9 +38,13 @@ class DictGraph:
         """
         remove edge from graph
         """
-        self.nodes[nodea].remove(nodeb)
-        if not self.directed:
+        edge = None
+        if nodeb in self.nodes[nodea]:
+            idx = self.nodes[nodea].index(nodeb)
+            edge = self.nodes[nodea].pop(idx)
+        if not self.directed and edge is not None:
             self.nodes[nodeb].remove(nodea)
+        return edge
 
     def yield_nodes(self):
         """
@@ -59,7 +65,6 @@ class DictGraph:
         False otherwise
         """
         return node in self.nodes
-
 
     def has_edge(self, nodea, nodeb):
         """
@@ -106,3 +111,39 @@ class DictGraph:
         if self.directed:
             return self.indegree(node) + self.outdegree(node)
         return self.outdegree(node)
+
+
+class WeightedDictGraph(DictGraph):
+    def __init__(self, directed=False):
+        """
+        Weighted graph data structure that uses pythons dict
+        """
+        super().__init__(directed)
+        self.weights = {}
+
+    def add_node(self, name):
+        """
+        add node to the graph
+        """
+        self.nodes[name] = {}
+
+    def add_edge(self, nodea, nodeb, weight):
+        """
+        add connection (edge) between two points on
+        the graph
+        """
+        self.nodes[nodea][nodeb] = weight
+        if not self.directed:
+            self.nodes[nodeb][nodea] = weight
+
+    def remove_edge(self, nodea, nodeb):
+        """
+        remove edge from the graph
+        """
+        edge = None
+        if nodea in self.nodes and nodeb in self.nodes[nodea]:
+            edge = self.nodes[nodea][nodeb]
+            del self.nodes[nodea][nodeb]
+            if not self.directed:
+                del self.nodes[nodeb][nodea]
+        return edge

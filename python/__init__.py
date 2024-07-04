@@ -5,13 +5,15 @@
 from CircularList import CircularList
 from queue import Queue
 from MatrixGraph import MatrixGraph
-from DictGraph import DictGraph
+from DictGraph import DictGraph, WeightedDictGraph
 
 __all__ = [
     "Queue",
     "CircularList"
     "MatrixGraph",
-    "DictGraph.py"
+    "DictGraph",
+    "WeightedDictGraph"
+
 ]
 
 if __name__ == "__main__":

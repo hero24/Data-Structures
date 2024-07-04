@@ -17,6 +17,7 @@ A repository containing implementations of different data-structures in various 
 |`SinglyLinkedList`|`C`,`C++`,`io`|
 |`SortedList`|`Haskell`|
 |`UniversalDictionaryStructure`|`C++`|
+|`WeightedDictGraph`|`Python`|
 
 ## Installing
 Python implementations can be easly installed by running `__init__.py`
