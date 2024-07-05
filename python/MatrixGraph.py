@@ -135,7 +135,7 @@ class WeightedMatrixGraph(MatrixGraph):
         """
         Weighted matrix-based graph
         """
-        super.__init__(directed)
+        super().__init__(directed)
 
     def add_edge(self, nodea, nodeb, weight):
         """
@@ -153,7 +153,7 @@ class WeightedMatrixGraph(MatrixGraph):
         """
         nodea, nodeb = self._get_connection(nodea, nodeb)
         weight = self.connections[nodea][nodeb]
-        del self.connections[nodea][nodeb]
+        self.connections[nodea][nodeb] = False
         if not self.directed:
-            del self.connections[nodeb][nodea]
+            self.connections[nodeb][nodea] = False
         return weight, nodea, nodeb
