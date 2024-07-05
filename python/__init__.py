@@ -4,7 +4,7 @@
 """
 from CircularList import CircularList
 from queue import Queue
-from MatrixGraph import MatrixGraph
+from MatrixGraph import MatrixGraph, WeightedMatrixGraph
 from DictGraph import DictGraph, WeightedDictGraph
 
 __all__ = [
@@ -12,8 +12,8 @@ __all__ = [
     "CircularList"
     "MatrixGraph",
     "DictGraph",
-    "WeightedDictGraph"
-
+    "WeightedDictGraph",
+    "WeightedMatrixGraph"
 ]
 
 if __name__ == "__main__":

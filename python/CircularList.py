@@ -7,10 +7,13 @@
    and all there ever will be to know and understand.
    ~ Albert Einstein
 """
+
+
 class CircularList:
     """
        CicrularList based on pythons built in list
     """
+
     def __init__(self):
         self.array = []
 
@@ -21,32 +24,32 @@ class CircularList:
     def __len__(self):
         " return length of the list "
         return len(self.array)
-    
-    def __getitem__(self,index):
+
+    def __getitem__(self, index):
         " get indexth element of the list "
         return self.array[self.get_index(index)]
 
-    def __setitem__(self,index,value):
+    def __setitem__(self, index, value):
         " set indexth element of the list "
         self.array[self.get_index(index)] = value
 
-    def get_index(self,index):
+    def get_index(self, index):
         " get the actual index of the list or raise IndexError if list is empty"
-        if(len(self.array) == 0):
+        if (len(self.array) == 0):
             raise IndexError("List index out of range")
         elif (index < 0):
             length = len(self.array) * -1
-            while(index < length):
+            while (index < length):
                 index += len(self.array)
             return index
         elif (index < len(self.array)):
             return index
         else:
             length = len(self.array)
-            index = index % length 
+            index = index % length
             return index
 
-    def append(self,item):
+    def append(self, item):
         " append item to the list "
         return self.array.append(item)
 
@@ -57,5 +60,3 @@ class CircularList:
     def __iter__(self):
         " allow for iteration through the list "
         return iter(self.array)
-    
-
