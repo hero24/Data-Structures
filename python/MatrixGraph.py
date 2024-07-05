@@ -20,7 +20,7 @@ class MatrixGraph:
         self.connections += [[False]]
         for connection in self.connections:
             length = len(self.nodes) - len(connection)
-            connection += [False for x in range(length)]
+            connection += [False for _ in range(length)]
 
     def remove_node(self, node):
         """
