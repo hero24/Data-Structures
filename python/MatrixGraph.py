@@ -48,6 +48,7 @@ class MatrixGraph:
         self.connections[nodea][nodeb] = False
         if not self.directed:
             self.connections[nodeb][nodea] = self.directed
+        return nodea, nodeb
 
     def yield_nodes(self):
         """
@@ -127,3 +128,32 @@ class MatrixGraph:
         nodea = self.nodes.index(nodea)
         nodeb = self.nodes.index(nodeb)
         return nodea, nodeb
+
+
+class WeightedMatrixGraph(MatrixGraph):
+    def __init__(self, directed=False):
+        """
+        Weighted matrix-based graph
+        """
+        super.__init__(directed)
+
+    def add_edge(self, nodea, nodeb, weight):
+        """
+        add edge to the graph structure
+        """
+        nodea, nodeb = self._get_connection(nodea, nodeb)
+        self.connections[nodea][nodeb] = weight
+        if not self.directed:
+            self.connections[nodeb][nodea] = weight
+
+    def remove_edge(self, nodea, nodeb):
+        """
+        remove edge from graph
+        returns weight, node a and node b
+        """
+        nodea, nodeb = self._get_connection(nodea, nodeb)
+        weight = self.connections[nodea][nodeb]
+        del self.connections[nodea][nodeb]
+        if not self.directed:
+            del self.connections[nodeb][nodea]
+        return weight, nodea, nodeb

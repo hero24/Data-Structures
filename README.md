@@ -8,9 +8,9 @@ A repository containing implementations of different data-structures in various 
 |--------------|---------|
 |`CircularList`|`Python`|
 |`DictGraph`|`Python`|
-|`MatrixGraph`|`Python`|
 |`HashTable`|`C`|
 |`Heap`|`C++`|
+|`MatrixGraph`|`Python`|
 |`Queue`|`Python`|
 |`SerializableArrayList`|`C#`|
 |`SerializableSinglyLinkedList`|`io`|
@@ -18,6 +18,7 @@ A repository containing implementations of different data-structures in various 
 |`SortedList`|`Haskell`|
 |`UniversalDictionaryStructure`|`C++`|
 |`WeightedDictGraph`|`Python`|
+|`WeightedMatrixGraph`|`Python`|
 
 ## Installing
 Python implementations can be easly installed by running `__init__.py`
