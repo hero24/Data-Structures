@@ -12,6 +12,9 @@ class MatrixGraph:
         self.connections = []
         self.directed = directed
 
+    def __len__(self):
+        return len(self.nodes)
+
     def add_node(self, name):
         """
         add node to the graph structure
@@ -49,6 +52,13 @@ class MatrixGraph:
         if not self.directed:
             self.connections[nodeb][nodea] = self.directed
         return nodea, nodeb
+
+    def yield_connections(self):
+        """
+        iterates through edges
+        """
+        for connection in self.connections:
+            yield connection
 
     def yield_nodes(self):
         """

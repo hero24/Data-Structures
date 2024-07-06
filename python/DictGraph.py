@@ -10,6 +10,9 @@ class DictGraph:
         self.nodes = {}
         self.directed = directed
 
+    def __len__(self):
+        return len(self.nodes)
+
     def add_node(self, name):
         """
         add node to the graph structure
@@ -45,6 +48,13 @@ class DictGraph:
         if not self.directed and edge is not None:
             self.nodes[nodeb].remove(nodea)
         return edge
+
+    def yield_connections(self):
+        """
+        iterates through edges
+        """
+        for node in self.nodes:
+            yield self.nodes[node]
 
     def yield_nodes(self):
         """
