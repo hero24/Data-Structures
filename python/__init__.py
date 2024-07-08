@@ -6,6 +6,7 @@ from CircularList import CircularList
 from queue import Queue
 from MatrixGraph import MatrixGraph, WeightedMatrixGraph
 from DictGraph import DictGraph, WeightedDictGraph
+from setup import install
 
 __all__ = [
     "Queue",
@@ -13,22 +14,12 @@ __all__ = [
     "MatrixGraph",
     "DictGraph",
     "WeightedDictGraph",
-    "WeightedMatrixGraph"
+    "WeightedMatrixGraph",
 ]
 
-def install():
-    from distutils.core import setup
-    setup(name="data_structures",
-      version="1.0",
-      description="Python implementations of various data-sturctures",
-      author="hero24",
-      package_dir={'hero24/data_structures':'.'},
-      packages=["hero24/data_structures"]
-      )
 
 if __name__ == "__main__":
     from sys import argv
+
     argv += ['install']
     install()
-
-
