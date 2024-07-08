@@ -4,10 +4,16 @@
 """
 from CircularList import CircularList
 from queue import Queue
+from MatrixGraph import MatrixGraph, WeightedMatrixGraph
+from DictGraph import DictGraph, WeightedDictGraph
 
 __all__ = [
     "Queue",
     "CircularList"
+    "MatrixGraph",
+    "DictGraph",
+    "WeightedDictGraph",
+    "WeightedMatrixGraph"
 ]
 
 if __name__ == "__main__":
