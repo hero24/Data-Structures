@@ -12,5 +12,5 @@ def install():
           packages=["hero24/data_structures"]
           )
 
-
-install()
+if __name__ == "__main__":
+    install()

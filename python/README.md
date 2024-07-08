@@ -21,5 +21,5 @@ python3 ./__init__.py
 ```
 
 ```commandline
-pip install hero24.data_structures
+pip install hero24.data-structures
 ```
