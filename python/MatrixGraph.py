@@ -167,3 +167,11 @@ class WeightedMatrixGraph(MatrixGraph):
         if not self.directed:
             self.connections[nodeb][nodea] = False
         return weight, nodea, nodeb
+
+    def get_weight(self, nodea, nodeb):
+        """
+            returns weight of the edge
+        """
+        nodea, nodeb = self._get_connection(nodea, nodeb)
+        weight = self.connections[nodea][nodeb]
+        return weight
