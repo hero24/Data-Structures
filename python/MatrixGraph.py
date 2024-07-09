@@ -86,7 +86,7 @@ class MatrixGraph:
         """
         nodea, nodeb = self._get_connection(nodea, nodeb)
         present = self.connections[nodea][nodeb]
-        if not self.directed:
+        if self.directed:
             return present
         return present or self.connections[nodeb][nodea]
 
