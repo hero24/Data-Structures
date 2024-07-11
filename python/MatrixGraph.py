@@ -28,12 +28,17 @@ class MatrixGraph:
     def remove_node(self, node):
         """
         remove node from graph structure
+        returns node, list of connections
         """
         idx = self.nodes.index(node)
         for connection in self.connections:
             connection.pop(idx)
-        self.nodes.pop(idx)
-        self.connections.pop(idx)
+        node = self.nodes.pop(idx)
+        connections = []
+        for i, connection in enumerate(self.connections.pop(idx)):
+            if connection is True:
+                connections.append(self.nodes[i])
+        return node, connections
 
     def add_edge(self, nodea, nodeb):
         """
@@ -46,19 +51,25 @@ class MatrixGraph:
     def remove_edge(self, nodea, nodeb):
         """
         remove edge from graph
+        returns a tuple of nodea and nodeb
         """
         nodea, nodeb = self._get_connection(nodea, nodeb)
         self.connections[nodea][nodeb] = False
         if not self.directed:
             self.connections[nodeb][nodea] = self.directed
-        return nodea, nodeb
+        return self.nodes[nodea], self.nodes[nodeb]
 
     def yield_connections(self):
         """
         iterates through edges
         """
-        for connection in self.connections:
-            yield connection
+        # fix api
+        for i, connection in enumerate(self.connections):
+            conn = []
+            for j in range(len(connection)):
+                if connection[j]:
+                    conn.append(self.nodes[j])
+            yield self.nodes[i], conn
 
     def yield_nodes(self):
         """
@@ -89,6 +100,12 @@ class MatrixGraph:
         if self.directed:
             return present
         return present or self.connections[nodeb][nodea]
+
+    def parent(self, node):
+        idx = self.nodes.index(node)
+        for i in range(len(self.connections)):
+            if self.connections[i][idx]:
+                return self.nodes[i], i
 
     def adjacent(self, node):
         """
@@ -166,11 +183,11 @@ class WeightedMatrixGraph(MatrixGraph):
         self.connections[nodea][nodeb] = False
         if not self.directed:
             self.connections[nodeb][nodea] = False
-        return weight, nodea, nodeb
+        return weight, self.nodes[nodea], self.nodes[nodeb]
 
     def get_weight(self, nodea, nodeb):
         """
-            returns weight of the edge
+            returns weight of the edge or False
         """
         nodea, nodeb = self._get_connection(nodea, nodeb)
         weight = self.connections[nodea][nodeb]

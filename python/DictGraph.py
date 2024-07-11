@@ -22,12 +22,14 @@ class DictGraph:
     def remove_node(self, node):
         """
         remove node from graph structure
+        returns node, list of connections
         """
-        del self.nodes[node]
+        connections = self.nodes[node]
         for key in self.nodes:
             if node in self.nodes[key]:
-                idx = self.nodes[key].idx(node)
-                return self.nodes[key].pop(idx)
+                idx = self.nodes[key].index(node)
+                self.nodes[key].pop(idx)
+        return node, connections
 
     def add_edge(self, nodea, nodeb):
         """
@@ -40,6 +42,7 @@ class DictGraph:
     def remove_edge(self, nodea, nodeb):
         """
         remove edge from graph
+        returns a tuple of nodea and nodeb
         """
         edge = None
         if nodeb in self.nodes[nodea]:
@@ -47,14 +50,14 @@ class DictGraph:
             edge = self.nodes[nodea].pop(idx)
         if not self.directed and edge is not None:
             self.nodes[nodeb].remove(nodea)
-        return edge
+        return nodea, edge
 
     def yield_connections(self):
         """
         iterates through edges
         """
         for node in self.nodes:
-            yield self.nodes[node]
+            yield node, self.nodes[node]
 
     def yield_nodes(self):
         """
@@ -156,4 +159,12 @@ class WeightedDictGraph(DictGraph):
             del self.nodes[nodea][nodeb]
             if not self.directed:
                 del self.nodes[nodeb][nodea]
-        return edge
+        return edge, nodea, nodeb
+
+    def get_weight(self, nodea, nodeb):
+        """
+        return weight of the edge or False
+        """
+        if nodea in self.nodes and nodeb in self.nodes[nodea]:
+            return self.nodes[nodea][nodeb]
+        return False

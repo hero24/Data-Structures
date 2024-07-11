@@ -7,7 +7,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "hero24.data_structures"
-version = "1.011"
+version = "1.012"
 authors = [
   { name="hero24", email="hero24@interia.pl" },
 ]
